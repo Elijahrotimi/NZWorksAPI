@@ -1,4 +1,5 @@
-﻿using NZWorksAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using NZWorksAPI.Data;
 using NZWorksAPI.Models.Domain;
 
 namespace NZWorksAPI.Repositories
@@ -11,9 +12,9 @@ namespace NZWorksAPI.Repositories
         {
             this.nZWalksDbContext = nZWalksDbContext;
         }
-        public IEnumerable<Region> GetAll()
+        public async Task<IEnumerable<Region>> GetAllAsync()
         {
-            return nZWalksDbContext.Regions.ToList();
+            return await nZWalksDbContext.Regions.ToListAsync();
         }
     }
 }
