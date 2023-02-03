@@ -93,5 +93,31 @@ namespace NZWorksAPI.Controllers
 
             return CreatedAtAction(nameof(GetRegionAsync), new { id = regionDTO.Id }, regionDTO);
         }
+
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteRegionAsync(Guid id)
+        {
+            //Get region for database
+            var region = await regionRepository.DeleteAsync(id);
+
+            //If null : NotFound
+            if (region == null) return NotFound();
+
+            //Convert response to DTO
+            var regionDTO = new Models.DTO.Region()
+            {
+                Id = region.Id,
+                Code = region.Code,
+                Name = region.Name,
+                Lat = region.Lat,
+                Long = region.Long,
+                Area = region.Area,
+                Population = region.Population
+            };
+
+            return Ok(regionDTO);
+
+        }
     }
 }
