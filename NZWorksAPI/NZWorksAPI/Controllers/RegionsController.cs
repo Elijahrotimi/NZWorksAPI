@@ -47,6 +47,7 @@ namespace NZWorksAPI.Controllers
 
         [HttpGet]
         [Route("{id:guid}")]
+        [ActionName("GetRegionAsync")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
         {
             var region = await regionRepository.GetAsync(id);
@@ -59,6 +60,38 @@ namespace NZWorksAPI.Controllers
             var regionDTO = mapper.Map<Models.DTO.Region>(region);
 
             return Ok(regionDTO);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRegionAsync(Models.DTO.AddRegionRequest addRegionRequest)
+        {
+            //Request (DTO) to Domain model
+            var region = new Models.Domain.Region()
+            {
+                Code = addRegionRequest.Code,
+                Name = addRegionRequest.Name,
+                Lat = addRegionRequest.Lat,
+                Long = addRegionRequest.Long,
+                Area = addRegionRequest.Area,
+                Population = addRegionRequest.Population
+            };
+
+            //Pass details to repository
+            region = await regionRepository.AddAsync(region);
+
+            //Convert back to DTO
+            var regionDTO = new Models.DTO.Region()
+            {
+                Id = region.Id,
+                Code = region.Code,
+                Name = region.Name,
+                Lat = region.Lat,
+                Long = region.Long,
+                Area = region.Area,
+                Population = region.Population
+            };
+
+            return CreatedAtAction(nameof(GetRegionAsync), new { id = regionDTO.Id }, regionDTO);
         }
     }
 }
