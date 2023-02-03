@@ -119,5 +119,40 @@ namespace NZWorksAPI.Controllers
             return Ok(regionDTO);
 
         }
+
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateRegionAsync([FromRoute]Guid id, [FromBody]Models.DTO.UpdateRegionRequest updateRegionRequest)
+        {
+            // Convert DTO to Domain model
+            var region = new Models.Domain.Region()
+            {
+                Code = updateRegionRequest.Code,
+                Name = updateRegionRequest.Name,
+                Lat = updateRegionRequest.Lat,
+                Long = updateRegionRequest.Long,
+                Area = updateRegionRequest.Area,
+                Population = updateRegionRequest.Population
+            };
+
+            // Update Region using Repository
+            region = await regionRepository.UpdateAsync(id, region);
+
+            if (region == null) { return NotFound(); }
+
+            // Convert back to DTO
+            var regionDTO = new Models.DTO.Region()
+            {
+                Id = region.Id,
+                Code = region.Code,
+                Name = region.Name,
+                Lat = region.Lat,
+                Long = region.Long,
+                Area = region.Area,
+                Population = region.Population
+            };
+
+            return Ok(regionDTO);
+        }
     }
 }
