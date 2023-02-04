@@ -7,5 +7,6 @@ namespace NZWorksAPI.Repositories
 
         Task<IEnumerable<Walk>> GetAllAsync();
 
+        Task<Walk> GetAsync(Guid id);
     }
 }
