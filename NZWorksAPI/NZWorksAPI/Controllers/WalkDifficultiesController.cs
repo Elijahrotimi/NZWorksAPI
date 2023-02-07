@@ -46,6 +46,12 @@ namespace NZWorksAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddWalkDifficultyAsync(Models.DTO.AddWalkDifficultyRequest addWalkDifficultyRequest)
         {
+            //Validate data
+            if (!ValidateAddWalkDifficultyAsync(addWalkDifficultyRequest))
+            {
+                return BadRequest(ModelState);
+            }
+
             //Request (DTO) to Domain model
             var walkDifficulty = new Models.Domain.WalkDifficulty()
             {
@@ -98,5 +104,30 @@ namespace NZWorksAPI.Controllers
             return Ok(walkDifficultyDTO);
 
         }
+
+        #region Private methods
+        private bool ValidateAddWalkDifficultyAsync(Models.DTO.AddWalkDifficultyRequest addWalkDifficultyRequest)
+        {
+            if (addWalkDifficultyRequest == null)
+            {
+                ModelState.AddModelError(nameof(addWalkDifficultyRequest),
+                    $"Add Region Data is required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(addWalkDifficultyRequest.Code))
+            {
+                ModelState.AddModelError(nameof(addWalkDifficultyRequest.Code),
+                    $"{nameof(addWalkDifficultyRequest.Code)} cannot be null or empty");
+            }
+
+            if (ModelState.ErrorCount > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
     }
 }
