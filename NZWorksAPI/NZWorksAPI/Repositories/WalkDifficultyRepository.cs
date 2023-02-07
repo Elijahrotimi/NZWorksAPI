@@ -12,6 +12,15 @@ namespace NZWorksAPI.Repositories
         {
             this.nZWalksDbContext = nZWalksDbContext;
         }
+
+        public async Task<WalkDifficulty> AddAsync(WalkDifficulty walkDifficulty)
+        {
+            walkDifficulty.Id = Guid.NewGuid();
+            await nZWalksDbContext.WalkDifficulty.AddAsync(walkDifficulty);
+            await nZWalksDbContext.SaveChangesAsync();
+            return walkDifficulty;
+        }
+
         public async Task<IEnumerable<WalkDifficulty>> GetAllAsync()
         {
             return await nZWalksDbContext.WalkDifficulty.ToListAsync();
