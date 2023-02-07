@@ -82,5 +82,21 @@ namespace NZWorksAPI.Controllers
             return Ok(walkDifficultyDTO);
         }
 
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteWalkDifficultyAsync(Guid id)
+        {
+            //Get region for database
+            var walkDifficulty = await walkDifficultyRepository.DeleteAsync(id);
+
+            //If null : NotFound
+            if (walkDifficulty == null) return NotFound();
+
+            //Convert response to DTO
+            var walkDifficultyDTO = mapper.Map<Models.DTO.WalkDifficulty>(walkDifficulty);
+
+            return Ok(walkDifficultyDTO);
+
+        }
     }
 }
