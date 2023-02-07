@@ -200,18 +200,6 @@ namespace NZWorksAPI.Controllers
                     $"{nameof(addRegionRequest.Area)} cannot be less than or equal to zero");
             }
 
-            if (addRegionRequest.Lat <= 0) 
-            {
-                ModelState.AddModelError(nameof(addRegionRequest.Lat),
-                    $"{nameof(addRegionRequest.Lat)} cannot be less than or equal to zero");
-            }
-
-            if (addRegionRequest.Long <= 0) 
-            {
-                ModelState.AddModelError(nameof(addRegionRequest.Long),
-                    $"{nameof(addRegionRequest.Long)} cannot be less than or equal to zero");
-            }
-
             if (addRegionRequest.Population < 0) 
             {
                 ModelState.AddModelError(nameof(addRegionRequest.Population),
@@ -250,18 +238,6 @@ namespace NZWorksAPI.Controllers
             {
                 ModelState.AddModelError(nameof(updateRegionRequest.Area),
                     $"{nameof(updateRegionRequest.Area)} cannot be less than or equal to zero");
-            }
-
-            if (updateRegionRequest.Lat <= 0) 
-            {
-                ModelState.AddModelError(nameof(updateRegionRequest.Lat),
-                    $"{nameof(updateRegionRequest.Lat)} cannot be less than or equal to zero");
-            }
-
-            if (updateRegionRequest.Long <= 0) 
-            {
-                ModelState.AddModelError(nameof(updateRegionRequest.Long),
-                    $"{nameof(updateRegionRequest.Long)} cannot be less than or equal to zero");
             }
 
             if (updateRegionRequest.Population < 0) 
