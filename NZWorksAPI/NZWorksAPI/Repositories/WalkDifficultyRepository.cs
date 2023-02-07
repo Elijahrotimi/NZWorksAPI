@@ -16,5 +16,10 @@ namespace NZWorksAPI.Repositories
         {
             return await nZWalksDbContext.WalkDifficulty.ToListAsync();
         }
+
+        public async Task<WalkDifficulty> GetAsync(Guid id)
+        {
+            return await nZWalksDbContext.WalkDifficulty.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

@@ -26,5 +26,22 @@ namespace NZWorksAPI.Controllers
             return Ok(walkdifficultiesDTO);
         }
 
+        [HttpGet]
+        [Route("{id:guid}")]
+        [ActionName("GetWalkDifficultyAsync")]
+        public async Task<IActionResult> GetWalkDifficultyAsync(Guid id)
+        {
+            var walkDifficulty = await walkDifficultyRepository.GetAsync(id);
+
+            if (walkDifficulty == null)
+            {
+                return NotFound();
+            }
+
+            var walkDifficultyDTO = mapper.Map<Models.DTO.WalkDifficulty>(walkDifficulty);
+
+            return Ok(walkDifficultyDTO);
+        }
+
     }
 }
