@@ -25,6 +25,8 @@ builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<IWalkRepository, WalkRepository>();
 builder.Services.AddScoped<IWalkDifficultyRepository, WalkDifficultyRepository>();
 
+builder.Services.AddSingleton<IUserRepository, StaticUserRepository>();
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
