@@ -133,10 +133,10 @@ namespace NZWorksAPI.Controllers
             [FromBody]Models.DTO.UpdateRegionRequest updateRegionRequest)
         {
             //Validate incoming data
-            if (!ValidateUpdateRegionAsync(updateRegionRequest))
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ValidateUpdateRegionAsync(updateRegionRequest))
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
 
             // Convert DTO to Domain model
