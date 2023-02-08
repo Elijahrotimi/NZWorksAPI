@@ -143,24 +143,24 @@ namespace NZWorksAPI.Controllers
 
         private async Task<bool> ValidateAddWalkAsync(Models.DTO.AddWalkRequest addWalkRequest)
         {
-            if (addWalkRequest == null)
-            {
-                ModelState.AddModelError(nameof(addWalkRequest),
-                    $"Add Walk Data is required");
-                return false;
-            }
+            //if (addWalkRequest == null)
+            //{
+            //    ModelState.AddModelError(nameof(addWalkRequest),
+            //        $"Add Walk Data is required");
+            //    return false;
+            //}
 
-            if (string.IsNullOrWhiteSpace(addWalkRequest.Name))
-            {
-                ModelState.AddModelError(nameof(addWalkRequest.Name),
-                    $"{nameof(addWalkRequest.Name)} cannot be null or empty");
-            }
+            //if (string.IsNullOrWhiteSpace(addWalkRequest.Name))
+            //{
+            //    ModelState.AddModelError(nameof(addWalkRequest.Name),
+            //        $"{nameof(addWalkRequest.Name)} cannot be null or empty");
+            //}
 
-            if (addWalkRequest.Length <= 0)
-            {
-                ModelState.AddModelError(nameof(addWalkRequest.Length),
-                    $"{nameof(addWalkRequest.Length)} should be greater than zero");
-            }
+            //if (addWalkRequest.Length <= 0)
+            //{
+            //    ModelState.AddModelError(nameof(addWalkRequest.Length),
+            //        $"{nameof(addWalkRequest.Length)} should be greater than zero");
+            //}
 
             var region = await regionRepository.GetAsync(addWalkRequest.RegionId);
             if (region == null)
