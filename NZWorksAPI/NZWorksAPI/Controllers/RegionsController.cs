@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NZWorksAPI.Models.Domain;
 using NZWorksAPI.Repositories;
@@ -7,6 +8,7 @@ namespace NZWorksAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class RegionsController : Controller
     {
         private readonly IRegionRepository regionRepository;
