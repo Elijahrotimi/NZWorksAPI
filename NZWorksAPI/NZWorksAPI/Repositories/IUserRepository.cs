@@ -1,7 +1,9 @@
-﻿namespace NZWorksAPI.Repositories
+﻿using NZWorksAPI.Models.Domain;
+
+namespace NZWorksAPI.Repositories
 {
     public interface IUserRepository
     {
-        Task<bool> AuthenticateAsync(string username, string password);
+        Task<User> AuthenticateAsync(string username, string password);
     }
 }

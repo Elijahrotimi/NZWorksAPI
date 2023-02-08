@@ -20,16 +20,12 @@ namespace NZWorksAPI.Repositories
             }
         };
 
-        public async Task<bool> AuthenticateAsync(string username, string password)
+        public async Task<User> AuthenticateAsync(string username, string password)
         {
             var user = Users.Find(x => x.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase) &&
             x.Password == password);
 
-            if(user != null)
-            {
-                return true;
-            }
-            return false;
+            return user;
         }
     }
 }
