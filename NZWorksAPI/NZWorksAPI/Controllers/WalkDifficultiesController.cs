@@ -73,10 +73,10 @@ namespace NZWorksAPI.Controllers
             [FromBody] Models.DTO.UpdateWalkDifficultyRequest updateWalkDifficultyRequest)
         {
             // Validate incoming request
-            if (!ValidateUpdateWalkDifficultyAsync(updateWalkDifficultyRequest))
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ValidateUpdateWalkDifficultyAsync(updateWalkDifficultyRequest))
+            //{
+            //    return BadRequest(ModelState);
+            //}
             // Convert DTO to Domain model
             var walkDifficulty = new Models.Domain.WalkDifficulty()
             {
