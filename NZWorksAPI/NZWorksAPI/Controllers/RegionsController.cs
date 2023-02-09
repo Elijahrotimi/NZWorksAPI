@@ -8,7 +8,6 @@ namespace NZWorksAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class RegionsController : Controller
     {
         private readonly IRegionRepository regionRepository;
@@ -20,6 +19,7 @@ namespace NZWorksAPI.Controllers
             this.mapper = mapper;
         }
         [HttpGet]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetAllRegions()
         {
             var regions = await regionRepository.GetAllAsync();
@@ -50,6 +50,7 @@ namespace NZWorksAPI.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetRegionAsync")]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
         {
             var region = await regionRepository.GetAsync(id);
@@ -65,6 +66,7 @@ namespace NZWorksAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> AddRegionAsync(Models.DTO.AddRegionRequest addRegionRequest)
         {
             //Validate data
@@ -105,6 +107,7 @@ namespace NZWorksAPI.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> DeleteRegionAsync(Guid id)
         {
             //Get region for database
@@ -131,6 +134,7 @@ namespace NZWorksAPI.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> UpdateRegionAsync([FromRoute]Guid id, 
             [FromBody]Models.DTO.UpdateRegionRequest updateRegionRequest)
         {
